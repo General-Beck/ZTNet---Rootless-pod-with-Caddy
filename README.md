@@ -26,11 +26,11 @@ sudo apt install -y podman passt
 
 ## 2. Why `pasta`?
 
-1. **No NAT** and copying host IP into container namespace - gives container the same address and routes as host ([Podman Documentation][3](https://docs.podman.io/en/stable/markdown/podman-network.1.html)).
-2. **Unprivileged**: `pasta` creates TAP interface inside namespace and proxies TCP/UDP/ICMP socket surface of host ([Ubuntu Manpages][4](https://manpages.ubuntu.com/manpages/noble/man1/pasta.1.html)).
-3. **High performance** for rootless containers compared to `slirp4netns` ([Oracle Documentation][5](https://docs.oracle.com/en/learn/ol-podman-pasta-networking/)).
+1. **No NAT** and copying host IP into container namespace - gives container the same address and routes as host ([Podman Documentation][1]).
+2. **Unprivileged**: `pasta` creates TAP interface inside namespace and proxies TCP/UDP/ICMP socket surface of host ([Ubuntu Manpages][2]).
+3. **High performance** for rootless containers compared to `slirp4netns` ([Oracle Documentation][3]).
 
-By default, non-root Podman uses the Netavark backend, but the actual user-mode network is provided by `pasta` (from the `passt` package) ([Podman Documentation][3](https://docs.podman.io/en/stable/markdown/podman-network.1.html)).
+By default, non-root Podman uses the Netavark backend, but the actual user-mode network is provided by `pasta` (from the `passt` package).
 
 ---
 
@@ -286,7 +286,7 @@ WantedBy=default.target
 sudo loginctl enable-linger ztnet
 ```
 
-– enable linger so that user units are launched without login ([freedesktop.org][6](https://www.freedesktop.org/software/systemd/man/loginctl.html)).
+– enable linger so that user units are launched without login ([freedesktop.org][4]).
 
 ### 5.2 User `ztnet` (rootless)
 
@@ -327,9 +327,7 @@ podman --remote --url=unix:/run/user/1000/podman/podman.sock ps
 
 As a result, all services start automatically in the `ztnet` session, work rootless, update and self-heal thanks to health-checks and RestartPolicy.
 
-[1]: https://docs.vultr.com/how-to-install-podman-on-ubuntu-24-04 "How to Install Podman on Ubuntu 24.04 - Vultr Docs"
-[2]: https://launchpad.net/ubuntu/noble/%2Bpackage/passt "passt : Noble (24.04) : Ubuntu - Launchpad"
-[3]: https://docs.podman.io/en/stable/markdown/podman-network.1.html "podman-network"
-[4]: https://manpages.ubuntu.com/manpages/noble/man1/pasta.1.html "passt - Unprivileged user-mode network connectivity for virtual ..."
-[5]: https://docs.oracle.com/en/learn/ol-podman-pasta-networking/ "Use Pasta Networking with Podman on Oracle Linux"
-[6]: https://www.freedesktop.org/software/systemd/man/loginctl.html "loginctl - Freedesktop.org"
+[1]: https://docs.podman.io/en/stable/markdown/podman-network.1.html "podman-network"
+[2]: https://manpages.ubuntu.com/manpages/noble/man1/pasta.1.html "passt - Unprivileged user-mode network connectivity for virtual ..."
+[3]: https://docs.oracle.com/en/learn/ol-podman-pasta-networking/ "Use Pasta Networking with Podman on Oracle Linux"
+[4]: https://www.freedesktop.org/software/systemd/man/loginctl.html "loginctl - Freedesktop.org"
