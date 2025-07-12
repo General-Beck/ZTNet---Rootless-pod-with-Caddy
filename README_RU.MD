@@ -26,11 +26,11 @@ sudo apt install -y podman passt
 
 ## 2. Зачем `pasta`?
 
-1. **Без NAT** и с копированием IP-хоста в namespace контейнера — контейнер получает тот же адрес и маршруты, что и хост ([Podman Documentation][3](https://docs.podman.io/en/stable/markdown/podman-network.1.html)).
-2. **Работает без привилегий**: `pasta` создаёт TAP-интерфейс внутри namespace и проксирует TCP/UDP/ICMP поверх сокетов хоста ([Ubuntu Manpages][4](https://manpages.ubuntu.com/manpages/noble/man1/pasta.1.html)).
-3. **Высокая производительность** для rootless-контейнеров по сравнению со `slirp4netns` ([Oracle Documentation][5](https://docs.oracle.com/en/learn/ol-podman-pasta-networking/)).
+1. **Без NAT** и с копированием IP-хоста в namespace контейнера — контейнер получает тот же адрес и маршруты, что и хост ([Podman Documentation][1](https://docs.podman.io/en/stable/markdown/podman-network.1.html)).
+2. **Работает без привилегий**: `pasta` создаёт TAP-интерфейс внутри namespace и проксирует TCP/UDP/ICMP поверх сокетов хоста ([Ubuntu Manpages][2](https://manpages.ubuntu.com/manpages/noble/man1/pasta.1.html)).
+3. **Высокая производительность** для rootless-контейнеров по сравнению со `slirp4netns` ([Oracle Documentation][3](https://docs.oracle.com/en/learn/ol-podman-pasta-networking/)).
 
-По умолчанию в rootless Podman выбран backend Netavark, но реальную user-mode сеть обеспечивает `pasta` (из пакета `passt`) ([Podman Documentation][3](https://docs.podman.io/en/stable/markdown/podman-network.1.html)).
+По умолчанию в rootless Podman выбран backend Netavark, но реальную user-mode сеть обеспечивает `pasta` (из пакета `passt`).
 
 ---
 
@@ -287,7 +287,7 @@ WantedBy=default.target
 sudo loginctl enable-linger ztnet
 ```
 
-– включаем linger, чтобы user-юниты запускались без логина ([freedesktop.org][6](https://www.freedesktop.org/software/systemd/man/loginctl.html)).
+– включаем linger, чтобы user-юниты запускались без логина ([freedesktop.org][4]).
 
 ### 5.2 Пользователь `ztnet` (rootless)
 
@@ -328,9 +328,7 @@ podman --remote --url=unix:/run/user/1000/podman/podman.sock ps
 
 В результате все сервисы стартуют автоматически в сессии `ztnet`, работают rootless, обновляются и self-heal благодаря health-checks и RestartPolicy.
 
-[1]: https://docs.vultr.com/how-to-install-podman-on-ubuntu-24-04 "How to Install Podman on Ubuntu 24.04 - Vultr Docs"
-[2]: https://launchpad.net/ubuntu/noble/%2Bpackage/passt "passt : Noble (24.04) : Ubuntu - Launchpad"
-[3]: https://docs.podman.io/en/stable/markdown/podman-network.1.html "podman-network"
-[4]: https://manpages.ubuntu.com/manpages/noble/man1/pasta.1.html "passt - Unprivileged user-mode network connectivity for virtual ..."
-[5]: https://docs.oracle.com/en/learn/ol-podman-pasta-networking/ "Use Pasta Networking with Podman on Oracle Linux"
-[6]: https://www.freedesktop.org/software/systemd/man/loginctl.html "loginctl - Freedesktop.org"
+[1]: https://docs.podman.io/en/stable/markdown/podman-network.1.html "podman-network"
+[2]: https://manpages.ubuntu.com/manpages/noble/man1/pasta.1.html "passt - Unprivileged user-mode network connectivity for virtual ..."
+[3]: https://docs.oracle.com/en/learn/ol-podman-pasta-networking/ "Use Pasta Networking with Podman on Oracle Linux"
+[4]: https://www.freedesktop.org/software/systemd/man/loginctl.html "loginctl - Freedesktop.org"
