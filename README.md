@@ -1,4 +1,4 @@
-# Installing ZTNet in user-mode using podman rootless pod. EN | [RU](README_RU.MD)
+# Installing [ZTNet](https://ztnet.network/) in user-mode using podman rootless pod. EN | [RU](README_RU.MD)
 
 ---
 
