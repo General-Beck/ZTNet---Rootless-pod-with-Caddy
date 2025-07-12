@@ -1,4 +1,4 @@
-# Установка ZTNet в окружении пользователя с использованием podman rootless pod. RU | [EN](README.MD)
+# Установка [ZTNet](https://ztnet.network/) в окружении пользователя с использованием podman rootless pod. RU | [EN](README.MD)
 
 ---
 
